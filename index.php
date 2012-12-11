@@ -32,4 +32,14 @@ function home_page(){
 }
 
 require_once 'Savant3.php';
-home_page();
+// Check if $_GET['p'] is set. If not, set it.
+
+if(!isset($_GET['p'])){
+  $_GET['p'] = "home";
+}
+if($_GET['p'] == "addItem"){
+  require_once("./additem.php");
+}
+else {
+  home_page();
+}
