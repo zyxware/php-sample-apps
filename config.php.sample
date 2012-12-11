@@ -1,0 +1,17 @@
+<?php
+/**
+* @file
+* Configuration file.
+*
+* This file is used to maintain the configuration file used in the system.
+*/
+
+global $DB_NAME;
+global $DB_USER;
+global $DB_PASSWORD;
+$DB_PASSWORD = "password";
+
+$DB_USER = "user";
+
+$DB_NAME = "database_name";
+
