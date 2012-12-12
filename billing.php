@@ -20,7 +20,7 @@ function generate_bill(){
         . " FROM `stock`"
         . " WHERE `code` = '" . $_POST["item-$i-code"] . "'";
         global $dbh;
-        
+
 
         $res = $dbh->query($sql);
         foreach ($res as $key => $val){
@@ -29,14 +29,14 @@ function generate_bill(){
           $_POST["item-$i-total"] = $val['price'] * $_POST["item-$i-quantity"];
           $price = $val['price'];
           $item = $val['item_name'];
-         
+
         }
       }
       else {
         $price = $_POST["item-$i-price"];
         $item  = $_POST["item-$i-item"];
       }
-    
+
       $rows[] = array(
                   "code"     => $_POST["item-$i-code"],
                   "item"     => $item,
@@ -46,16 +46,16 @@ function generate_bill(){
                 );
       $sum = $sum + $_POST["item-$i-total"];
     }
-    $tpl->rows = $rows;  
-    
+    $tpl->rows = $rows;
+
   }
   $tpl->sum = $sum;
   $tpl->title = "Billing";
-  $tpl->display("billing.php.tpl"); 
+  $tpl->display("billing.php.tpl");
 }
 /**
 * Display the bill
-* 
+*
 * @params int $bill_no
 *   The Bill No of the bill to be displayed.
 */
@@ -81,9 +81,9 @@ function display_bill($bill_no){
   $tpl->display("bill.php.tpl");
 }
 /**
-* Generate the bill for each item. 
+* Generate the bill for each item.
 *
-* 
+*
 */
 function bill(){
   $tpl  = new Savant3();
@@ -91,14 +91,14 @@ function bill(){
   $sum  = 0;
   $sql = "INSERT INTO `bill` (`amount`)"
   . " VALUES (0)";
-  
+
   global $dbh;
-  
+
   $dbh->exec($sql);
   $bill_no = $dbh->lastInsertId();
   for($i = 1; isset($_POST["item-$i"]) && $_POST["item-$i-price"] != ""; $i++){
     $sql = "UPDATE `stock`"
-    . " SET quantity = quantity - " . $_POST["item-$i-quantity"] 
+    . " SET quantity = quantity - " . $_POST["item-$i-quantity"]
     . " WHERE `code` = '" . $_POST["item-$i-code"] . "'";
     $dbh->exec($sql);
     $sql = "INSERT INTO `items` (`bill_no`,`item_code`,`quantity`,`price`)"
@@ -114,33 +114,13 @@ function bill(){
   . " SET amount = $sum"
   . " WHERE bill_no = $bill_no";
   $dbh->exec($sql);
-  
+
   display_bill($bill_no);
-  
-  
+
+
 
 }
 
 
-if(isset($_POST['Bill'])){
-  bill();
-}
-if(isset($_GET['view'])){
-  if($_GET['view'] != NULL){
-    display_bill($_GET['view']);
-  }
-  else {
-    global $tpl;
-    $tpl->title = "Bill Details";
-    $tpl->display("billno.php.tpl");
-    
-    
-    
-  }
-}
-else
-{
-  generate_bill();
-}
 
 

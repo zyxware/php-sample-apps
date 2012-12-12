@@ -150,10 +150,5 @@ function process_form(){
 }
 
 //require_once ("Savant3.php");
-if(isset($_POST['submit'])){
-  process_form();
-}
-else {
-  display_form();
-}
+
 

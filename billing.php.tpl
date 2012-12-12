@@ -5,7 +5,7 @@
     </title>
   </head>
   <body>
-  
+
     <div class = "nav" style = "height:25px; width:100%">
       <a href = "?p=home">Edit Stock</a>
       <p style = "float:right">Billing System</p>
@@ -78,7 +78,7 @@
     </table>
     <input type = "submit" value = "Add more" name = "add More">
     <input type = "submit" value = "Bill" name = "Bill">
-    </form> 
+    </form>
   </body>
 </html>
-
+S

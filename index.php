@@ -52,17 +52,55 @@ if(!isset($_GET['p'])){
 }
 if($_GET['p'] == "addItem"){
   require_once("./additem.php");
+  if(isset($_POST['submit'])){
+  process_form();
+  }
+  else {
+    display_form();
+  }
 }
 else if($_GET['p'] == "update"){
   require_once("./update.php");
+  if(isset($_POST['submit'])){
+  update_item($_POST['code'],$_POST['amount']);
+  }
+  if(isset($_POST['rateUpdate'])){
+    update_rate($_POST['code'],$_POST['rate']);
+  }
+  if(isset($_GET['search'])){
+   display_item($_GET['search']);
+  }
+  else {
+  display_item();
+  }
 }
-else if($_GET['p'] == 'billing'){
-  require_once("./billing.php");
-}
-else if($_GET['p'] == 'home'){
+  else if($_GET['p'] == 'home'){
   home_page();
 }
 else {
+
   require_once("./billing.php");
+
+
+  if(isset($_POST['Bill'])){
+    bill();
+  }
+  if(isset($_GET['view'])){
+    if($_GET['view'] != NULL){
+      display_bill($_GET['view']);
+    }
+    else {
+      global $tpl;
+      $tpl->title = "Bill Details";
+      $tpl->display("billno.php.tpl");
+
+
+
+    }
+  }
+  else
+  {
+    generate_bill();
+  }
 }
 

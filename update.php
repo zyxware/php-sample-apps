@@ -36,7 +36,7 @@ function update_rate($code,$rate){
   $sql = "UPDATE `stock`"
   . " SET `price` = '$rate'"
   . " WHERE code = '$code'";
-  
+
   $dbh->exec($sql);
 }
 
@@ -53,20 +53,9 @@ function update_item($code,$amount){
   $sql = "UPDATE `stock`"
   . " SET `quantity` = `quantity` + $amount"
   . " WHERE code = '$code'";
-  
+
   $dbh->exec($sql);
 }
 
-if(isset($_POST['submit'])){
-  update_item($_POST['code'],$_POST['amount']);
-}
-if(isset($_POST['rateUpdate'])){
-  update_rate($_POST['code'],$_POST['rate']);
-}
-if(isset($_GET['search'])){
-  display_item($_GET['search']);
-}
-else {
-display_item();
-}
+
 
