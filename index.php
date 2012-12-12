@@ -40,17 +40,30 @@ function home_page(){
   $tpl->menuoptions = $menuoptions;
   $tpl->display('index.php.tpl');
 }
+
+session_start();
+
 require_once 'Savant3.php';
 require_once './config.php';
+require_once './auth.inc';
+
 
 $dbh = new PDO("mysql:host=localhost;dbname=" . $DB_NAME, $DB_USER, $DB_PASSWORD);
 $tpl = new Savant3();
 // Check if $_GET['p'] is set. If not, set it.
-
 if(!isset($_GET['p'])){
   $_GET['p'] = "billing";
 }
-if($_GET['p'] == "addItem"){
+
+if(!isset($_SESSION['user'])){
+  require_once("authenticate.php");
+  display_login_form();
+}
+else if($_GET['p'] == 'logout'){
+  require_once("authenticate.php");
+  logout();
+}
+else if($_GET['p'] == "addItem"){
   require_once("./additem.php");
   if(isset($_POST['submit'])){
   process_form();
@@ -59,7 +72,8 @@ if($_GET['p'] == "addItem"){
     display_form();
   }
 }
-else if($_GET['p'] == "update"){
+else if($_GET['p'] == "update" && in_array("items",$auth[$_SESSION["role"]])){
+
   require_once("./update.php");
   if(isset($_POST['submit'])){
   update_item($_POST['code'],$_POST['amount']);

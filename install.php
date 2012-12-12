@@ -34,6 +34,11 @@ try{
   . "`price` DECIMAL(10,2) DEFAULT NULL"
   . ")";
   $dbh->exec($sql);
+  $sql = "CREATE TABLE IF NOT EXISTS `users`("
+  . "`username` VARCHAR(20) PRIMARY KEY,"
+  . "`password` VARCHAR(50) NOT NULL,"
+  . "`role` VARCHAR(10) NOT NULL DEFAULT 'user')";
+  $dbh->exec($sql);
 
 
 }
