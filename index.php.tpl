@@ -2,7 +2,7 @@
   <title>
     <?php $this->eprint($this->title); ?>
   </title>
-  
+</head>
   <body>
     <?php if(is_array($this->menuoptions)): ?>
       <?php foreach ($this->menuoptions as $key => $val): ?>

@@ -23,6 +23,22 @@ function display_item($code = NULL){
   $tpl->title = "List";
   $tpl->display("update.php.tpl");
 }
+/**
+* Update the rate of the item indicated by the code
+*
+* @params string $code
+*   The code of the item of which the amount is to be updated.
+* @params int $rate
+*   The rate of items to be added to the repository.
+*/
+function update_rate($code,$rate){
+  global $dbh;
+  $sql = "UPDATE `stock`"
+  . " SET `price` = '$rate'"
+  . " WHERE code = '$code'";
+  
+  $dbh->exec($sql);
+}
 
 /**
 * Update the amount of the item indicated by the code
@@ -33,22 +49,24 @@ function display_item($code = NULL){
 *   The amount of items to be added to the repository.
 */
 function update_item($code,$amount){
-  $sql = "SELECT `quantity`,`code`"
-  . " FROM `stock`"
-  . " WHERE `code` = '$code'";
   global $dbh;
-  $result = $dbh->query($sql);
-  foreach ($result as $key => $row) {
-    $value = $amount + $row[0];
-    $sql = "UPDATE `stock`"
-    . " SET `quantity` = '$value'"
-    . " WHERE code = '$code'";
-  }
+  $sql = "UPDATE `stock`"
+  . " SET `quantity` = `quantity` + $amount"
+  . " WHERE code = '$code'";
+  
   $dbh->exec($sql);
 }
 
 if(isset($_POST['submit'])){
   update_item($_POST['code'],$_POST['amount']);
 }
+if(isset($_POST['rateUpdate'])){
+  update_rate($_POST['code'],$_POST['rate']);
+}
+if(isset($_GET['search'])){
+  display_item($_GET['search']);
+}
+else {
 display_item();
+}
 

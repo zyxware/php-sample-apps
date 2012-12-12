@@ -29,7 +29,7 @@ try{
 
   $sql = "CREATE TABLE IF NOT EXISTS `items`("
   . "`bill_no` INT REFERENCES `bill` (`bill_no`),"
-  . "`item_id` INT REFERENCES `stock` (`id`),"
+  . "`item_code` VARCHAR(5) REFERENCES `stock` (`code`),"
   . "`quantity` INT DEFAULT 0,"
   . "`price` DECIMAL(10,2) DEFAULT NULL"
   . ")";
