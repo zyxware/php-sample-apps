@@ -64,11 +64,14 @@ else if($_GET['p'] == "update"){
   if(isset($_POST['submit'])){
   update_item($_POST['code'],$_POST['amount']);
   }
-  if(isset($_POST['rateUpdate'])){
+  else if(isset($_POST['rateUpdate'])){
     update_rate($_POST['code'],$_POST['rate']);
   }
-  if(isset($_GET['search'])){
+  else if(isset($_GET['search'])){
    display_item($_GET['search']);
+  }
+  else if(isset($_POST['block'])){
+    block_items();
   }
   else {
   display_item();
@@ -85,7 +88,7 @@ else {
   if(isset($_POST['Bill'])){
     bill();
   }
-  if(isset($_GET['view'])){
+  else if(isset($_GET['view'])){
     if($_GET['view'] != NULL){
       display_bill($_GET['view']);
     }
@@ -93,9 +96,6 @@ else {
       global $tpl;
       $tpl->title = "Bill Details";
       $tpl->display("billno.php.tpl");
-
-
-
     }
   }
   else

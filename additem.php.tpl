@@ -4,6 +4,10 @@
   </title>
 
   <body>
+    <div class = "nav" style = "height:25px; width:100%">
+      <a href = "?p=update">Edit Stock</a>
+      <p style = "float:right">Billing System</p>
+    </div>
     <?php if(isset($this->form_fields)): ?>
       <form name = "additem" action = "index.php?p=addItem" method = "post">
 

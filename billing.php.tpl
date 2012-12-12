@@ -7,7 +7,8 @@
   <body>
 
     <div class = "nav" style = "height:25px; width:100%">
-      <a href = "?p=home">Edit Stock</a>
+      <a href = "?p=update">Edit Stock</a>
+      <a href = "?view">View Bill</a>
       <p style = "float:right">Billing System</p>
     </div>
     <div style = "clear:both"></div>
@@ -81,4 +82,4 @@
     </form>
   </body>
 </html>
-S
+

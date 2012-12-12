@@ -12,11 +12,12 @@
 function display_item($code = NULL){
   $tpl = new Savant3();
   $sql = "SELECT `id`,`code`,`item_name`,`quantity`,`price`"
-  . " FROM `stock`";
+  . " FROM `stock` WHERE status = 'AVAIL'";
   //If $code is passed append it to the sql query
   if($code != NULL){
-    $sql .= " WHERE `code` = '$code'";
+    $sql .= " AND `code` = '$code'";
   }
+  
   global $dbh;
   $result = $dbh->query($sql);
   $tpl->row = $result;
@@ -48,6 +49,7 @@ function update_rate($code,$rate){
 * @params int $amount
 *   The amount of items to be added to the repository.
 */
+
 function update_item($code,$amount){
   global $dbh;
   $sql = "UPDATE `stock`"
@@ -57,5 +59,19 @@ function update_item($code,$amount){
   $dbh->exec($sql);
 }
 
-
+/**
+* Block items from sale.
+* 
+*/
+function block_items(){
+  global $dbh;
+  foreach ($_POST["checkbox_values"] as $val){
+    $sql = "UPDATE `stock`"
+    . " SET `status` = 'BLOCK'"
+    . " WHERE `code` = '$val'";
+    $dbh->exec($sql);
+    
+  }
+  display_item();
+}
 

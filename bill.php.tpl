@@ -5,6 +5,10 @@
     </title>
   </head>
   <body>
+    <div class = "nav" style = "height:25px; width:100%">
+      <a href = "index.php">Billing</a>
+      <p style = "float:right">Billing System</p>
+    </div>
     <p>Bill NO : <?php echo $this->eprint($this->bill_no); ?></p>
     <p>Total : <?php echo $this->eprint($this->total); ?></p>
     <table style = "width:100%;text-align:center">

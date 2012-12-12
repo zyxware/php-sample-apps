@@ -4,14 +4,26 @@
   </title>
 
   <body>
+    <div class = "nav" style = "height:25px; width:100%">
+      <a href = "index.php">Billing</a>
+      <a href = "?p=addItem">Add Item</a>
+      <p style = "float:right">Billing System</p>
+    </div>
     <?php if(isset($this->row)): ?>
       <form name = "Search" action = "index.php" method = "get">
         <input type = "hidden" name = "p" value = "update">
         <input type = "text" name = "search">
         <input type = "submit" value = "Search">
       </form>
+      <form name = "disable_option" action = "index.php?p=update" method = "post">
       <table style = "width:100%; text-align:center">
         <tr>
+          <td>
+            
+          </td>
+        </tr>
+        <tr>
+          <th></th>
           <th>Code</th>
           <th>Name</th>
           <th>Available Quantity</th>
@@ -21,6 +33,7 @@
         </tr>
         <?php foreach ($this->row as $key => $val): ?>
           <tr>
+            <td><input type = "checkbox" name = "checkbox_values[]" value = "<?php echo $this->eprint($val['code']); ?>"></td>
             <td><?php echo $this->eprint($val['code']); ?></td>
             <td><?php echo $this->eprint($val['item_name']); ?></td>
             <td><?php echo $this->eprint($val['quantity']); ?></td>
@@ -41,6 +54,10 @@
             </form>
           </tr>
         <?php endforeach; ?>
+        
+          <tr><td><td></tr>
+        </form>
+        <input type = "submit" value = "block" name = "block">
       </table>
     <?php endif; ?>
   </body>
