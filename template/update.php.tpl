@@ -20,7 +20,7 @@
       <table style = "width:100%; text-align:center">
         <tr>
           <td>
-            
+
           </td>
         </tr>
         <tr>
@@ -55,7 +55,7 @@
             </form>
           </tr>
         <?php endforeach; ?>
-        
+
           <tr><td><td></tr>
         </form>
         <input type = "submit" value = "block" name = "block">
