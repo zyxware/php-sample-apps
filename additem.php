@@ -38,7 +38,7 @@ function display_form(){
   $title = "Add Item";
   $tpl->title = $title;
   $tpl->form_fields = $form_fields;
-  $tpl->display("additem.php.tpl");
+  $tpl->display("./template/additem.php.tpl");
 }
 
 /**
@@ -145,7 +145,7 @@ function process_form(){
     $title = "Item details";
   }
   $tpl->title = $title;
-  $tpl->display('additem.php.tpl');
+  $tpl->display('./template/additem.php.tpl');
 
 }
 

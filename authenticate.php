@@ -51,7 +51,7 @@ function display_login_form(){
   else{
     $tpl->form = true;
   }
-  $tpl->display("login_form.php.tpl");
+  $tpl->display("./template/login_form.php.tpl");
 }
 /**
 * Function to handle the logout from sessions.
@@ -62,7 +62,7 @@ function logout(){
   session_destroy();
   global $tpl;
   $tpl->msg = "Logged out sucessfully";
-  $tpl->display("login_form.php.tpl");
+  $tpl->display("./template/login_form.php.tpl");
 }
 /**
 * Function to check Role

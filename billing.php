@@ -51,7 +51,7 @@ function generate_bill(){
   }
   $tpl->sum = $sum;
   $tpl->title = "Billing";
-  $tpl->display("billing.php.tpl");
+  $tpl->display("./template/billing.php.tpl");
 }
 /**
 * Display the bill
@@ -78,7 +78,7 @@ function display_bill($bill_no){
   $ref = $dbh->query($sql);
   $tpl->rows = $ref;
   $tpl->title = "Bill no";
-  $tpl->display("bill.php.tpl");
+  $tpl->display("./template/bill.php.tpl");
 }
 /**
 * Generate the bill for each item.

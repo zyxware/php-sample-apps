@@ -38,7 +38,7 @@ function home_page(){
 
   $tpl->title = $name;
   $tpl->menuoptions = $menuoptions;
-  $tpl->display('index.php.tpl');
+  $tpl->display('./template/index.php.tpl');
 }
 
 session_start();
@@ -112,7 +112,7 @@ else {
     else {
       global $tpl;
       $tpl->title = "Bill Details";
-      $tpl->display("billno.php.tpl");
+      $tpl->display("./template/billno.php.tpl");
     }
   }
   else

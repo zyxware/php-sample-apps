@@ -22,7 +22,7 @@ function display_item($code = NULL){
   $result = $dbh->query($sql);
   $tpl->row = $result;
   $tpl->title = "List";
-  $tpl->display("update.php.tpl");
+  $tpl->display("./template/update.php.tpl");
 }
 /**
 * Update the rate of the item indicated by the code
@@ -57,6 +57,7 @@ function update_item($code,$amount){
   . " WHERE code = '$code'";
 
   $dbh->exec($sql);
+  display_item();
 }
 
 /**
