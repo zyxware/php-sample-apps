@@ -5,7 +5,7 @@
 *
 * This is the install script file. Used to install the to create the database.
 */
-require_once("./config.php");
+require_once("./config/config.php");
 
 try{
   $dbh = new PDO("mysql:host=localhost;dbname=" . $DB_NAME, $DB_USER, $DB_PASSWORD);

@@ -2,7 +2,7 @@
 
 
 
-require_once './config.php';
+require_once './config/config.php';
 $dbh = new PDO("mysql:host=localhost;dbname=" . $DB_NAME, $DB_USER, $DB_PASSWORD);
 $sql = "SELECT `item_name`,`price`"
 . " FROM `stock`"

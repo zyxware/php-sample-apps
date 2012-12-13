@@ -44,7 +44,7 @@ function home_page(){
 session_start();
 
 require_once 'Savant3.php';
-require_once './config.php';
+require_once './config/config.php';
 require_once './auth.inc';
 require_once './authenticate.php';
 require_once './menu.php';

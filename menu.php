@@ -19,7 +19,7 @@
 */
 function generate_menu($page = NULL){
 //This is set by the user.
-  require_once "./menu.cfg";
+  require_once "./config/menu.cfg";
   global $menuoptions;
   $menu = array();
   if(isset($_SESSION['role'])){
