@@ -45,7 +45,7 @@ session_start();
 
 require_once 'Savant3.php';
 require_once './config/config.php';
-require_once './include/auth.inc';
+require_once './config/auth.php';
 require_once './include/authenticate.inc';
 require_once './include/menu.inc';
 require_once("./include/billing.inc");
