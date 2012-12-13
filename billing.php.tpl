@@ -3,6 +3,28 @@
     <title>
       <?php $this->eprint($this->title); ?>
     </title>
+    <script type = "text/javascript" src = "jquery.min.js"></script>
+    <script type = "text/javascript">
+      $(document).ready(function(){
+        $(".current-code").change(function(){
+          $(".current-value").change(function(){
+
+            $.ajax({
+              url : "index.php?p=billing",
+              method : "POST",
+              data : $("#billingForm").serialize(),
+              dataType : "html",
+              success : function(data){
+                var content = $(data).find("#content");
+                $("#content").empty();
+                alert(content);
+              }
+            })
+          });
+        });
+
+      });
+    </script>
   </head>
   <body>
 
@@ -13,7 +35,8 @@
       <?php endforeach; ?>
     </div>
     <div style = "clear:both"></div>
-    <form name = "bill" action = "index.php?p=billing" method = "post">
+    <div id = "content">
+    <form name = "bill" action = "index.php?p=billing" method = "post" id = "billingForm">
     <table style = "width:100%; text-align:center">
       <tr>
         <th>#</th>
@@ -54,13 +77,13 @@
           <input type = "hidden" name = "item-<?php echo $i; ?>">
         </td>
         <td>
-          <input type = "text" name = "item-<?php echo $i; ?>-code">
+          <input type = "text" name = "item-<?php echo $i; ?>-code" class = "current-code">
         </td>
         <td>
           <input type = "text" name = "item-<?php echo $i; ?>-item">
         </td>
         <td>
-          <input type = "text" name = "item-<?php echo $i; ?>-quantity">
+          <input type = "text" name = "item-<?php echo $i; ?>-quantity" class = "current-value">
         </td>
         <td>
           <input type = "text" name = "item-<?php echo $i; ?>-price">
@@ -81,6 +104,7 @@
     <input type = "submit" value = "Add more" name = "add More">
     <input type = "submit" value = "Bill" name = "Bill">
     </form>
+    </div>
   </body>
 </html>
 
