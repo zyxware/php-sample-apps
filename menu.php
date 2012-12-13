@@ -19,32 +19,8 @@
 */
 function generate_menu($page = NULL){
 //This is set by the user.
-  $menuoptions = array(
-    array(
-      'name'        => 'addItem',
-      '#href'       => '?p=addItem',
-      'description' => 'Add item',
-      'perms'       => 'items'
-    ),
-    array(
-      'name'        => 'billing',
-      '#href'       => '?p=billing',
-      'description' => 'Billing',
-      'perms'       => 'bill'
-    ),
-    array(
-      'name'        => 'update',
-      '#href'       => '?p=update',
-      'description' => 'Inventory Management',
-      'perms'       => 'items'
-    ),
-    array(
-      'name'        => 'view_bill',
-      '#href'       => '?p=billing&view',
-      'description' => 'View Bill',
-      'perms'       => 'view_bill'
-    )
-  );
+  require_once "./menu.cfg";
+  global $menuoptions;
   $menu = array();
   if(isset($_SESSION['role'])){
     foreach ($menuoptions as $key => $val){
@@ -52,7 +28,7 @@ function generate_menu($page = NULL){
         $menu[] = $val;
       }
     }
-    $menu[] = array(
+    $menu["logout"] = array(
       '#href'       => '?p=logout',
       'description' => 'Logout',
       'perms'       => 'authenticated'
