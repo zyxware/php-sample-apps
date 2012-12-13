@@ -6,21 +6,17 @@
     <script type = "text/javascript" src = "jquery.min.js"></script>
     <script type = "text/javascript">
       $(document).ready(function(){
-        $(".current-code").change(function(){
-          $(".current-value").change(function(){
+        $(".current-code").focus().change(function(){
+          $.getJSON("getdetails.php","code=" + $(".current-code").val(), function(data){
+            $(".current-item").val(data.item);
+            $(".current-price").val(data.price);
+            $(".current-value").focus().change(function(){
+              $(".current-total").val($(".current-value").val() * $(".current-price").val());
+            });
 
-            $.ajax({
-              url : "index.php?p=billing",
-              method : "POST",
-              data : $("#billingForm").serialize(),
-              dataType : "html",
-              success : function(data){
-                var content = $(data).find("#content");
-                $("#content").empty();
-                alert(content);
-              }
-            })
           });
+
+
         });
 
       });
@@ -80,16 +76,16 @@
           <input type = "text" name = "item-<?php echo $i; ?>-code" class = "current-code">
         </td>
         <td>
-          <input type = "text" name = "item-<?php echo $i; ?>-item">
+          <input type = "text" name = "item-<?php echo $i; ?>-item" class = "current-item">
         </td>
         <td>
           <input type = "text" name = "item-<?php echo $i; ?>-quantity" class = "current-value">
         </td>
         <td>
-          <input type = "text" name = "item-<?php echo $i; ?>-price">
+          <input type = "text" name = "item-<?php echo $i; ?>-price" class = "current-price">
         </td>
         <td>
-          <input type = "text" name = "item-<?php echo $i; ?>-total">
+          <input type = "text" name = "item-<?php echo $i; ?>-total" class = "current-total">
         </td>
       </tr>
       <tr>
