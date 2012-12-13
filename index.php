@@ -48,6 +48,7 @@ require_once './config/config.php';
 require_once './include/auth.inc';
 require_once './include/authenticate.php';
 require_once './include/menu.php';
+require_once("./include/billing.php");
 
 
 $dbh = new PDO("mysql:host=localhost;dbname=" . $DB_NAME, $DB_USER, $DB_PASSWORD);
@@ -99,7 +100,7 @@ else if($page == "update" && check_perms("items")){
 }
 else {
 
-  require_once("./include/billing.php");
+
 
 
   if(isset($_POST['Bill'])){

@@ -42,6 +42,8 @@ function display_login_form(){
   if(isset($_POST['username']) && isset($_POST['password'])){
     if(check_password($_POST['username'],$_POST['password'])){
       $tpl->msg = "Logged in sucessfully. Refresh page to go home";
+      generate_bill();
+      return;
     }
     else{
       $tpl->msg = "Username Password combination incorrect";
@@ -62,7 +64,7 @@ function logout(){
   session_destroy();
   global $tpl;
   $tpl->msg = "Logged out sucessfully";
-  $tpl->display("./template/login_form.php.tpl");
+  display_login_form();
 }
 /**
 * Function to check Role
