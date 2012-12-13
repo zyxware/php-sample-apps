@@ -5,8 +5,10 @@
 
   <body>
     <div class = "nav" style = "height:25px; width:100%">
-      <a href = "?p=update">Edit Stock</a>
-      <p style = "float:right">Billing System</p>
+       <?php $nav = generate_menu("addItem"); ?>
+      <?php foreach ($nav as $val): ?>
+        <a href = "<?php echo $val['#href']; ?>"><?php echo $val['description']; ?></a>
+      <?php endforeach; ?>
     </div>
     <?php if(isset($this->form_fields)): ?>
       <form name = "additem" action = "index.php?p=addItem" method = "post">

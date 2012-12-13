@@ -46,6 +46,8 @@ session_start();
 require_once 'Savant3.php';
 require_once './config.php';
 require_once './auth.inc';
+require_once './authenticate.php';
+require_once './menu.php';
 
 
 $dbh = new PDO("mysql:host=localhost;dbname=" . $DB_NAME, $DB_USER, $DB_PASSWORD);
@@ -63,7 +65,7 @@ else if($_GET['p'] == 'logout'){
   require_once("authenticate.php");
   logout();
 }
-else if($_GET['p'] == "addItem"){
+else if($_GET['p'] == "addItem" && check_perms("items")){
   require_once("./additem.php");
   if(isset($_POST['submit'])){
   process_form();
@@ -72,7 +74,7 @@ else if($_GET['p'] == "addItem"){
     display_form();
   }
 }
-else if($_GET['p'] == "update" && in_array("items",$auth[$_SESSION["role"]])){
+else if($_GET['p'] == "update" && check_perms("items")){
 
   require_once("./update.php");
   if(isset($_POST['submit'])){

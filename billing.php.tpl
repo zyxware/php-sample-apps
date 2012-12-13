@@ -7,9 +7,10 @@
   <body>
 
     <div class = "nav" style = "height:25px; width:100%">
-      <a href = "?p=update">Edit Stock</a>
-      <a href = "?view">View Bill</a>
-      <p style = "float:right">Billing System</p>
+      <?php $nav = generate_menu("billing"); ?>
+      <?php foreach ($nav as $val): ?>
+        <a href = "<?php echo $val['#href']; ?>"><?php echo $val['description']; ?></a>
+      <?php endforeach; ?>
     </div>
     <div style = "clear:both"></div>
     <form name = "bill" action = "index.php?p=billing" method = "post">

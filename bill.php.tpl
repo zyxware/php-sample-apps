@@ -6,7 +6,10 @@
   </head>
   <body>
     <div class = "nav" style = "height:25px; width:100%">
-      <a href = "index.php">Billing</a>
+      <?php $nav = generate_menu("billing"); ?>
+      <?php foreach ($nav as $val): ?>
+        <a href = "<?php echo $val['#href']; ?>"><?php echo $val['description']; ?></a>
+      <?php endforeach; ?>
       <p style = "float:right">Billing System</p>
     </div>
     <p>Bill NO : <?php echo $this->eprint($this->bill_no); ?></p>

@@ -53,7 +53,10 @@ function display_login_form(){
   }
   $tpl->display("login_form.php.tpl");
 }
-
+/**
+* Function to handle the logout from sessions.
+*
+*/
 function logout(){
   unset($_SESSION);
   session_destroy();
@@ -61,4 +64,21 @@ function logout(){
   $tpl->msg = "Logged out sucessfully";
   $tpl->display("login_form.php.tpl");
 }
-
+/**
+* Function to check Role
+*
+* Function te check if the authenticated user role has permission to access
+* A particular sub module.
+*
+* @params string $perm
+*   The perm to be checked against the authenticated user.
+*
+* @return boolean
+*   Returns true if the user is allowed to access a particular function. False
+*   otherwise.
+*
+*/
+function check_perms($perm){
+  global $auth;
+  return in_array($perm,$auth[$_SESSION['role']]);
+}
