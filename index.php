@@ -45,9 +45,9 @@ session_start();
 
 require_once 'Savant3.php';
 require_once './config/config.php';
-require_once './auth.inc';
-require_once './authenticate.php';
-require_once './menu.php';
+require_once './include/auth.inc';
+require_once './include/authenticate.php';
+require_once './include/menu.php';
 
 
 $dbh = new PDO("mysql:host=localhost;dbname=" . $DB_NAME, $DB_USER, $DB_PASSWORD);
@@ -59,15 +59,15 @@ if(isset($_GET['p'])){
 }
 
 if(!isset($_SESSION['user'])){
-  require_once("authenticate.php");
+  require_once("./include/authenticate.php");
   display_login_form();
 }
 else if($page == 'logout'){
-  require_once("authenticate.php");
+  require_once("./include/authenticate.php");
   logout();
 }
 else if($page == "addItem" && check_perms("items")){
-  require_once("./additem.php");
+  require_once("./include/additem.php");
   if(isset($_POST['submit'])){
   process_form();
   }
@@ -77,7 +77,7 @@ else if($page == "addItem" && check_perms("items")){
 }
 else if($page == "update" && check_perms("items")){
 
-  require_once("./update.php");
+  require_once("./include/update.php");
   if(isset($_POST['submit'])){
   update_item($_POST['code'],$_POST['amount']);
   }
@@ -99,7 +99,7 @@ else if($page == "update" && check_perms("items")){
 }
 else {
 
-  require_once("./billing.php");
+  require_once("./include/billing.php");
 
 
   if(isset($_POST['Bill'])){

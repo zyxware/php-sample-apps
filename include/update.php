@@ -17,7 +17,7 @@ function display_item($code = NULL){
   if($code != NULL){
     $sql .= " AND `code` = '$code'";
   }
-  
+
   global $dbh;
   $result = $dbh->query($sql);
   $tpl->row = $result;
@@ -62,7 +62,7 @@ function update_item($code,$amount){
 
 /**
 * Block items from sale.
-* 
+*
 */
 function block_items(){
   global $dbh;
@@ -71,7 +71,7 @@ function block_items(){
     . " SET `status` = 'BLOCK'"
     . " WHERE `code` = '$val'";
     $dbh->exec($sql);
-    
+
   }
   display_item();
 }
