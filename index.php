@@ -52,20 +52,21 @@ require_once './menu.php';
 
 $dbh = new PDO("mysql:host=localhost;dbname=" . $DB_NAME, $DB_USER, $DB_PASSWORD);
 $tpl = new Savant3();
-// Check if $_GET['p'] is set. If not, set it.
-if(!isset($_GET['p'])){
-  $_GET['p'] = "billing";
+// Set $page. If not, set it.
+$page = "billing";
+if(isset($_GET['p'])){
+  $page = $_GET['p'];
 }
 
 if(!isset($_SESSION['user'])){
   require_once("authenticate.php");
   display_login_form();
 }
-else if($_GET['p'] == 'logout'){
+else if($page == 'logout'){
   require_once("authenticate.php");
   logout();
 }
-else if($_GET['p'] == "addItem" && check_perms("items")){
+else if($page == "addItem" && check_perms("items")){
   require_once("./additem.php");
   if(isset($_POST['submit'])){
   process_form();
@@ -74,7 +75,7 @@ else if($_GET['p'] == "addItem" && check_perms("items")){
     display_form();
   }
 }
-else if($_GET['p'] == "update" && check_perms("items")){
+else if($page == "update" && check_perms("items")){
 
   require_once("./update.php");
   if(isset($_POST['submit'])){
@@ -93,7 +94,7 @@ else if($_GET['p'] == "update" && check_perms("items")){
   display_item();
   }
 }
-  else if($_GET['p'] == 'home'){
+  else if($page == 'home'){
   home_page();
 }
 else {
