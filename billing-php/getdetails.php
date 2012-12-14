@@ -1,5 +1,8 @@
 <?php
-
+/*
+* @file
+* script to return the details of the stock provided by the code parameter
+*/
 
 
 require_once './config/config.php';

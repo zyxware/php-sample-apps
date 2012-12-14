@@ -5,6 +5,9 @@
 *
 * Display menu's on each page. The menus are generated based on the active page,
 * the user role.
+*/
+/*
+* Function to generate the menu
 *
 * @params string $page
 *   (Optional) The current page. Defaults to null.

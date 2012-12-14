@@ -7,39 +7,7 @@
 * on the system. This also loads the corresponding file according to the
 * request
 */
-/**
-* Generate home page
-*/
-function home_page(){
-  $tpl = new Savant3();
-  $menuoptions = array(
-    array(
-      '#href'       => '?p=addItem',
-      'description' => 'Add new item',
-      'hover'       => 'Click to add a new item'
-    ),
-    array(
-      '#href'       => '?p=billing',
-      'description' => 'Billing',
-      'hover'       => 'Click to bill a new customer'
-    ),
-    array(
-      '#href'       => '?p=update',
-      'description' => 'List inventory',
-      'hover'       => 'Click to list the inventory and update stock'
-    ),
-    array(
-      '#href'       => '?p=billing&view',
-      'description' => 'View Bill',
-      'hover'       => 'Click to view the bill details'
-    )
-    );
-  $name = 'Welcome';
 
-  $tpl->title = $name;
-  $tpl->menuoptions = $menuoptions;
-  $tpl->display('./template/index.php.tpl');
-}
 
 session_start();
 
@@ -95,14 +63,7 @@ else if($page == "update" && check_perms("items")){
   display_item();
   }
 }
-  else if($page == 'home'){
-  home_page();
-}
 else {
-
-
-
-
   if(isset($_POST['Bill'])){
     bill();
   }

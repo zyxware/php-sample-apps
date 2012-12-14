@@ -129,11 +129,5 @@ function bill(){
   $ref->bindParam(':bill_no',$bill_no);
   $ref->execute();
   display_bill($bill_no);
-
-
-
 }
-
-
-
 

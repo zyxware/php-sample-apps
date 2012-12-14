@@ -1,4 +1,8 @@
 <?php
+/*
+* @file
+* File to provide with the menu option to be made available on the site
+*/
   global $menuoptions;
   $menuoptions = array(
     'addItem' => array(
