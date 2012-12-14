@@ -43,7 +43,7 @@ function home_page(){
 
 session_start();
 
-require_once 'Savant3.php';
+require_once './lib/Savant3/Savant3.php';
 require_once './config/config.php';
 require_once './config/auth.php';
 require_once './include/authenticate.inc';
