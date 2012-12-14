@@ -29,6 +29,9 @@ with the program are.
   Single point of entry allows all request to various pages to be processed by
   a single file. This permits the file to act as a controller which controls
   what files are accessed by which users etc.
+  For example:
+    http://example.com/?p=something
+    Would call the corresponding handler to handle and process the request of p.
 
 4. PDO database connect.
   PDO database connect allows us to abstract the type of database used. Database

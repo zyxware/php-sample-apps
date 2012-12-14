@@ -63,6 +63,9 @@ else if($page == "update" && check_perms("items")){
   display_item();
   }
 }
+else if($page == "getdetails"){
+  require_once("./include/getdetails.inc");
+}
 else {
   if(isset($_POST['Bill'])){
     bill();
