@@ -18,11 +18,14 @@
 function check_password($username,$password){
   $sql = "SELECT `role`"
   . " FROM `users`"
-  . " WHERE `username` = '$username'"
-  . " AND `password` = '" . sha1($password) . "'";
+  . " WHERE `username` = :username"
+  . " AND `password` = :password";
   global $dbh;
-  $res = $dbh->query($sql);
-
+  $res = $dbh->prepare($sql);
+  $res->bindParam(':username',$username);
+  $password = sha1($password);
+  $res->bindParam(':password',$password);
+  $res->execute();
   if($row = $res->fetch()){
     $_SESSION['user'] = $username;
     $_SESSION['role'] = $row['role'];

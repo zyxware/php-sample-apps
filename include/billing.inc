@@ -18,11 +18,13 @@ function generate_bill(){
       if($_POST["item-$i-total"] == ""){
         $sql = "SELECT `code`,`item_name`,`price`"
         . " FROM `stock`"
-        . " WHERE `code` = '" . $_POST["item-$i-code"] . "'";
+        . " WHERE `code` = :code";
         global $dbh;
+        $ref = $dbh->prepare($sql);
+        $ref->bindParam(':code',$_POST["item-$i-code"]);
+        $ref->execute();
 
-
-        $res = $dbh->query($sql);
+        $res = $ref->fetchAll();
         foreach ($res as $key => $val){
           $_POST["item-$i-item"] = $val['item_name'];
           $_POST["item-$i-price"] = $val['price'];
@@ -63,10 +65,12 @@ function display_bill($bill_no){
   $rows = array();
   $sql = "SELECT `bill_no`,`amount`"
   . " FROM `bill`"
-  . " WHERE `bill_no` = $bill_no";
+  . " WHERE `bill_no` = :bill_no";
   global $tpl;
   global $dbh;
-  $ref = $dbh->query($sql);
+  $ref = $dbh->prepare($sql);
+  $ref->bindParam(':bill_no',$bill_no);
+  $ref->execute();
   $row = $ref->fetch();
   $tpl->bill_no = $bill_no;
   $tpl->total   = $row['amount'];
@@ -74,9 +78,11 @@ function display_bill($bill_no){
   . ",`stock`.`item_name`"
   . " FROM `items`,`stock`"
   . " WHERE `items`.`item_code` = `stock`.`code`"
-  . " AND `items`.`bill_no` = '$bill_no'";
-  $ref = $dbh->query($sql);
-  $tpl->rows = $ref;
+  . " AND `items`.`bill_no` = :bill_no";
+  $ref = $dbh->prepare($sql);
+  $ref->bindParam('bill_no',$bill_no);
+  $ref->execute();
+  $tpl->rows = $ref->fetchAll();
   $tpl->title = "Bill no";
   $tpl->display("./template/bill.php.tpl");
 }
@@ -102,19 +108,24 @@ function bill(){
     . " WHERE `code` = '" . $_POST["item-$i-code"] . "'";
     $dbh->exec($sql);
     $sql = "INSERT INTO `items` (`bill_no`,`item_code`,`quantity`,`price`)"
-    . " VALUES ($bill_no,"
-    . "'" . $_POST["item-$i-code"] . "',"
-    . "'" . $_POST["item-$i-quantity"] . "',"
-    . "'" . $_POST["item-$i-price"] . "'"
-    . ")";
-    $dbh->exec($sql);
-    $sum = $sum + $_POST["item-$i-total"];
+    . " VALUES (:bill_no,:item_code,:quantity,:price)";
+    $ref = $dbh->prepare($sql);
+    $ref->bindParam(':bill_no',$bill_no);
+    $ref->bindParam(':item_code',$_POST["item-$i-code"]);
+    $ref->bindParam(':quantity',$_POST["item-$i-quantity"]);
+    $ref->bindParam(':price',$_POST["item-$i-price"]);
+    $ref->execute();
+
+   $sum = $sum + $_POST["item-$i-total"];
   }
   $sql = "UPDATE `bill`"
-  . " SET amount = $sum"
-  . " WHERE bill_no = $bill_no";
-  $dbh->exec($sql);
+  . " SET amount = :sum"
+  . " WHERE bill_no = :bill_no";
 
+  $ref = $dbh->prepare($sql);
+  $ref->bindParam(':sum',$sum);
+  $ref->bindParam(':bill_no',$bill_no);
+  $ref->execute();
   display_bill($bill_no);
 
 

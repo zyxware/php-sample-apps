@@ -57,9 +57,16 @@ function display_form(){
 */
 function insert_database($code,$name,$price,$quantity){
   $sql = "INSERT INTO stock (code,item_name,price,quantity)"
-  . " VALUES ('$code','$name',$price,$quantity)";
+  . " VALUES (:code,:name,:price,:quantity)";
   global $dbh;
-  $dbh->exec($sql);
+  $ref = $dbh->prepare($sql);
+  $ref->bindParam(':code',$code);
+  $ref->bindParam(':name',$name);
+  $ref->bindParam(':price',$price);
+  $ref->bindParam(':quantity',$quantity);
+
+
+  $ref->execute();
 }
 
 /**
@@ -74,11 +81,12 @@ function insert_database($code,$name,$price,$quantity){
 function check_code($code){
   $sql = "SELECT COUNT(*)"
   . " FROM `stock`"
-  . " WHERE `code` = '$code'";
+  . " WHERE `code` = :code";
   global $dbh;
 
-  $ref = $dbh->query($sql);
-
+  $ref = $dbh->prepare($sql);
+  $ref->bindParam(':code',$code);
+  $ref->execute();
   if($ref->fetchColumn() == 0){
     return false;
   }

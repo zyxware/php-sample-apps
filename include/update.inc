@@ -35,10 +35,13 @@ function display_item($code = NULL){
 function update_rate($code,$rate){
   global $dbh;
   $sql = "UPDATE `stock`"
-  . " SET `price` = '$rate'"
-  . " WHERE code = '$code'";
-
-  $dbh->exec($sql);
+  . " SET `price` = :rate"
+  . " WHERE code = :code";
+  $ref = $dbh->prepare($sql);
+  $ref->bindParam(':code',$code);
+  $ref->bindParam(':rate',$rate);
+  $ref->execute();
+  display_item();
 }
 
 /**
@@ -53,10 +56,11 @@ function update_rate($code,$rate){
 function update_item($code,$amount){
   global $dbh;
   $sql = "UPDATE `stock`"
-  . " SET `quantity` = `quantity` + $amount"
+  . " SET `quantity` = `quantity` + :amount"
   . " WHERE code = '$code'";
-
-  $dbh->exec($sql);
+  $ref = $dbh->prepare($sql);
+  $ref->bindParam(':amount',$amount);
+  $ref->execute();
   display_item();
 }
 
@@ -69,8 +73,10 @@ function block_items(){
   foreach ($_POST["checkbox_values"] as $val){
     $sql = "UPDATE `stock`"
     . " SET `status` = 'BLOCK'"
-    . " WHERE `code` = '$val'";
-    $dbh->exec($sql);
+    . " WHERE `code` = :code";
+    $ref = $dbh->prepare($sql);
+    $ref->bindParam(':code',$val);
+    $ref->execute();
 
   }
   display_item();
