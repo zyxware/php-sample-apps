@@ -22,7 +22,8 @@ function display_item($code = NULL){
   $result = $dbh->query($sql);
   $tpl->row = $result;
   $tpl->title = "List";
-  $tpl->display("./template/update.php.tpl");
+  $tpl->content = $tpl->fetch("./template/update.php.tpl");
+  $tpl->display("./template/index.php.tpl");
 }
 /**
 * Update the rate of the item indicated by the code

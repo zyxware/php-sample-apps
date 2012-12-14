@@ -38,7 +38,8 @@ function display_form(){
   $title = "Add Item";
   $tpl->title = $title;
   $tpl->form_fields = $form_fields;
-  $tpl->display("./template/additem.php.tpl");
+  $tpl->content = $tpl->fetch("./template/additem.php.tpl");
+  $tpl->display("./template/index.php.tpl");
 }
 
 /**
@@ -153,7 +154,8 @@ function process_form(){
     $title = "Item details";
   }
   $tpl->title = $title;
-  $tpl->display('./template/additem.php.tpl');
+  $tpl->content = $tpl->fetch('./template/additem.php.tpl');
+  $tpl->display('./template/index.php.tpl');
 
 }
 

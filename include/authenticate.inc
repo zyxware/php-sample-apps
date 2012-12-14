@@ -56,7 +56,9 @@ function display_login_form(){
   else{
     $tpl->form = true;
   }
-  $tpl->display("./template/login_form.php.tpl");
+  $tpl->content = $tpl->fetch("./template/login_form.php.tpl");
+  $tpl->display("./template/index.php.tpl");
+
 }
 /**
 * Function to handle the logout from sessions.

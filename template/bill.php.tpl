@@ -1,11 +1,4 @@
-<html>
-  <head>
-    <title>
-      <?php $this->eprint($this->title); ?>
-    </title>
-  </head>
-  <body>
-    <div class = "nav" style = "height:25px; width:100%">
+<div class = "nav" style = "height:25px; width:100%">
       <?php $nav = generate_menu("billing"); ?>
       <?php foreach ($nav as $val): ?>
         <a href = "<?php echo $val['#href']; ?>"><?php echo $val['description']; ?></a>
@@ -32,6 +25,4 @@
         </tr>
       <?php endforeach; ?>
     </table>
-  </body>
-</html>
 

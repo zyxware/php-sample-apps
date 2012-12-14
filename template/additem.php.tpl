@@ -1,9 +1,3 @@
-<head>
-  <title>
-    <?php $this->eprint($this->title); ?>
-  </title>
-
-  <body>
     <div class = "nav" style = "height:25px; width:100%">
        <?php $nav = generate_menu("addItem"); ?>
       <?php foreach ($nav as $val): ?>
@@ -30,7 +24,3 @@
         <?php echo $this->eprint($val['description']); ?>  :  <?php echo $this->eprint($val['value']); ?><br />
       <?php endforeach; ?>
     <?php endif; ?>
-    </form>
-  </body>
-</html>
-

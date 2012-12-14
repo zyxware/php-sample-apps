@@ -1,9 +1,3 @@
-<head>
-  <title>
-    <?php $this->eprint($this->title); ?>
-  </title>
-
-  <body>
     <div class = "nav" style = "height:25px; width:100%">
        <?php $nav = generate_menu("update"); ?>
       <?php foreach ($nav as $val): ?>
@@ -61,6 +55,3 @@
         <input type = "submit" value = "block" name = "block">
       </table>
     <?php endif; ?>
-  </body>
-</html>
-
