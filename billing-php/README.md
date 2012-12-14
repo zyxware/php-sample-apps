@@ -50,7 +50,7 @@ with the program are.
 ### 7. Git version control system.
   The git version control system was used to maintain the code.
 
-The project was designed and developed at zyxware technologies under the guidance
+The project was designed and developed at [Zyxware Technologies](http://www.zyxware.com/) under the guidance
 of Vimal Joseph.
 
 
