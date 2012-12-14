@@ -77,7 +77,8 @@ else {
     else {
       global $tpl;
       $tpl->title = "Bill Details";
-      $tpl->display("./template/billno.php.tpl");
+      $tpl->content = $tpl->fetch("./template/billno.php.tpl");
+      $tpl->display("./template/index.php.tpl");
     }
   }
   else
