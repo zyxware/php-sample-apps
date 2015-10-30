@@ -1,17 +1,17 @@
 <?php
-/*
-* @file
-* script to return the details of the stock provided by the code parameter
-*/
 
+/*
+ * @file
+ * script to return the details of the stock provided by the code parameter
+ */
 
 require_once './config/config.php';
 $dbh = new PDO("mysql:host=localhost;dbname=" . $DB_NAME, $DB_USER, $DB_PASSWORD);
 $sql = "SELECT `item_name`,`price`"
-. " FROM `stock`"
-. " WHERE `code` = :stock_code";
+    . " FROM `stock`"
+    . " WHERE `code` = :stock_code";
 $ref = $dbh->prepare($sql);
-$ref->bindParam(':stock_code',$_REQUEST['code']);
+$ref->bindParam(':stock_code', $_REQUEST['code']);
 $ref->execute();
 $row = $ref->fetch();
 $return['item'] = $row['item_name'];
